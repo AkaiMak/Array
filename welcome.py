@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QFont, QPalette, QColor
 from PyQt5.QtCore import Qt
-from mfi20 import *  # Import the MFI20 class from another file
+from test import *  # Import the MFI20 class from another file
 
 class Welcome(QWidget):
     def __init__(self):
@@ -94,11 +94,19 @@ class Welcome(QWidget):
         main_layout.addWidget(self.start_button)
         self.setLayout(main_layout)
 
+    def connects(self):
+        self.start_button.clicked.connect(self.start_test)
+
+    def set_appear(self):
+        self.setWindowTitle("Python | Списки")
+        self.resize(700, 600)
+        self.move(100, 100)
+
     def open_test_form(self):
-        # Import the test form file
-        self.test_form = MFI20()
-        self.test_form.show()
-        self.close()
+        from test import QuestionsWindow
+        self.hide()
+        self.questions_window = QuestionsWindow()
+        self.questions_window.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
